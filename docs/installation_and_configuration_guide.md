@@ -74,6 +74,10 @@
 - [Newsletter](#newsletter)
 - [VoIP telephony](#voip-telephony)
 - [CRM integration with messengers](#crm-integration-with-messengers)
+- [Modifying Django-CRM for Transport Rental Service](#modifying-django-crm-for-transport-rental-service)
+  - [Removing Chat, VoIP, and Email Features](#removing-chat-voip-and-email-features)
+  - [Adding an Inventory System](#adding-an-inventory-system)
+  - [Creating a Reservations Tab and a Normal CRM Tab](#creating-a-reservations-tab-and-a-normal-crm-tab)
 
 ## Introduction
 
@@ -693,3 +697,98 @@ And also add provider data to the VOIP list in the file
 
 Django CRM has the ability to send messages via messengers.  Such as  
 Viber, WhatsApp, Skype. To do this, these applications must be installed on the user's device.
+
+## Modifying Django-CRM for Transport Rental Service
+
+### Removing Chat, VoIP, and Email Features
+
+To remove chat, VoIP, and email features from Django-CRM, follow these steps:
+
+1. **Remove Chat Feature:**
+   - Delete the `chat` app from the project.
+   - Remove any references to the `chat` app in the codebase, including models, views, templates, and URLs.
+   - Update the `INSTALLED_APPS` setting in `settings.py` to exclude the `chat` app.
+
+2. **Remove VoIP Feature:**
+   - Delete the `voip` app from the project.
+   - Remove any references to the `voip` app in the codebase, including models, views, templates, and URLs.
+   - Update the `INSTALLED_APPS` setting in `settings.py` to exclude the `voip` app.
+
+3. **Remove Email Feature:**
+   - Delete the `massmail` app from the project.
+   - Remove any references to the `massmail` app in the codebase, including models, views, templates, and URLs.
+   - Update the `INSTALLED_APPS` setting in `settings.py` to exclude the `massmail` app.
+
+### Adding an Inventory System
+
+To add an inventory system for a Transport Rental service, follow these steps:
+
+1. **Create Inventory Models:**
+   - Define models for vehicles, vehicle types, and rental status in a new app called `inventory`.
+   - Example models:
+     ```python
+     from django.db import models
+
+     class VehicleType(models.Model):
+         name = models.CharField(max_length=100)
+         description = models.TextField()
+
+     class Vehicle(models.Model):
+         type = models.ForeignKey(VehicleType, on_delete=models.CASCADE)
+         registration_number = models.CharField(max_length=50)
+         status = models.CharField(max_length=50)
+         availability = models.BooleanField(default=True)
+     ```
+
+2. **Create Inventory Views and Templates:**
+   - Create views to list, add, edit, and delete vehicles and vehicle types.
+   - Create templates for the inventory views.
+
+3. **Update URLs:**
+   - Add URLs for the inventory views in the `urls.py` file of the `inventory` app.
+
+4. **Update Admin Site:**
+   - Register the inventory models in the admin site to manage them through the Django admin interface.
+
+### Creating a Reservations Tab and a Normal CRM Tab
+
+To create a reservations tab and a normal CRM tab for pre-closed deals, follow these steps:
+
+1. **Create Reservations Models:**
+   - Define models for reservations in the `inventory` app.
+   - Example model:
+     ```python
+     from django.db import models
+     from django.contrib.auth.models import User
+
+     class Reservation(models.Model):
+         vehicle = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
+         user = models.ForeignKey(User, on_delete=models.CASCADE)
+         start_date = models.DateTimeField()
+         end_date = models.DateTimeField()
+         status = models.CharField(max_length=50)
+     ```
+
+2. **Create Reservations Views and Templates:**
+   - Create views to list, add, edit, and delete reservations.
+   - Create templates for the reservations views.
+
+3. **Update URLs:**
+   - Add URLs for the reservations views in the `urls.py` file of the `inventory` app.
+
+4. **Update Admin Site:**
+   - Register the reservations models in the admin site to manage them through the Django admin interface.
+
+5. **Create Normal CRM Tab:**
+   - Update the CRM views and templates to include a tab for pre-closed deals.
+   - Modify the CRM models to include a field for pre-closed deals.
+   - Example modification:
+     ```python
+     class Deal(models.Model):
+         # existing fields...
+         pre_closed = models.BooleanField(default=False)
+     ```
+
+6. **Update CRM Views and Templates:**
+   - Update the CRM views to filter and display pre-closed deals in the normal CRM tab.
+   - Create templates for the normal CRM tab views.
