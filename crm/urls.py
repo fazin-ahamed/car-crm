@@ -17,6 +17,9 @@ from crm.views.got_massmails import got_leads_massmails
 from crm.views.view_original_email import view_original_email
 from crm.views.change_owner_companies import change_owner_companies
 
+from crm.views.vehicle_views import VehicleListView, VehicleDetailView, VehicleCreateView, VehicleUpdateView
+from crm.views.reservation_views import ReservationListView, ReservationDetailView, ReservationCreateView, ReservationUpdateView
+from crm.views.customer_views import CustomerListView, CustomerDetailView, CustomerCreateView, CustomerUpdateView
 
 urlpatterns = [
     path('', crm_site.urls),
@@ -91,4 +94,19 @@ urlpatterns = [
         staff_member_required(download_original_email),
         name='download_original_email'
     ),
+
+    path('vehicles/', VehicleListView.as_view(), name='vehicle_list'),
+    path('vehicles/add/', VehicleCreateView.as_view(), name='vehicle_add'),
+    path('vehicles/<int:pk>/', VehicleDetailView.as_view(), name='vehicle_detail'),
+    path('vehicles/<int:pk>/edit/', VehicleUpdateView.as_view(), name='vehicle_edit'),
+
+    path('reservations/', ReservationListView.as_view(), name='reservation_list'),
+    path('reservations/add/', ReservationCreateView.as_view(), name='reservation_add'),
+    path('reservations/<int:pk>/', ReservationDetailView.as_view(), name='reservation_detail'),
+    path('reservations/<int:pk>/edit/', ReservationUpdateView.as_view(), name='reservation_edit'),
+
+    path('customers/', CustomerListView.as_view(), name='customer_list'),
+    path('customers/add/', CustomerCreateView.as_view(), name='customer_add'),
+    path('customers/<int:pk>/', CustomerDetailView.as_view(), name='customer_detail'),
+    path('customers/<int:pk>/edit/', CustomerUpdateView.as_view(), name='customer_edit'),
 ]

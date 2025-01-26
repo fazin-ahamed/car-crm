@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation Detail</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Reservation Detail</h1>
+        <div class="reservation-detail">
+            <p><strong>Vehicle:</strong> {{ reservation.vehicle }}</p>
+            <p><strong>Customer:</strong> {{ reservation.customer }}</p>
+            <p><strong>Start Date:</strong> {{ reservation.start_date }}</p>
+            <p><strong>End Date:</strong> {{ reservation.end_date }}</p>
+            <p><strong>Status:</strong> {{ reservation.status }}</p>
+            <p><strong>Total Cost:</strong> {{ reservation.total_cost }}</p>
+            <p><strong>Payment Status:</strong> {{ reservation.payment_status }}</p>
+        </div>
+        <a href="{% url 'reservation_edit' reservation.id %}">Edit Reservation</a>
+        <a href="{% url 'reservation_list' %}">Back to Reservations</a>
+    </div>
+</body>
+</html>

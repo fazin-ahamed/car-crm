@@ -28,6 +28,9 @@ from crm.models import Request
 from crm.models import Tag
 from crm.models import Shipment
 from crm.models import Stage
+from crm.models import Vehicle
+from crm.models import Reservation
+from crm.models import Customer
 from crm.site import companyadmin
 from crm.site import dealadmin
 from crm.site import contactadmin
@@ -426,6 +429,9 @@ admin.site.register(Request, RequestAdmin)
 admin.site.register(Shipment, ShipmentAdmin)
 admin.site.register(Stage, StageAdmin)
 admin.site.register(Tag, tagadmin.TagAdmin)
+admin.site.register(Vehicle)
+admin.site.register(Reservation)
+admin.site.register(Customer)
 
 crm_site.register(City, cityadmin.CityAdmin)
 crm_site.register(Company, companyadmin.CompanyAdmin)
@@ -439,3 +445,6 @@ crm_site.register(Product, productadmin.ProductAdmin)
 crm_site.register(Request, requestadmin.RequestAdmin)
 crm_site.register(Shipment, ShipmentAdmin)
 crm_site.register(Tag, tagadmin.TagAdmin)
+crm_site.register(Vehicle)
+crm_site.register(Reservation)
+crm_site.register(Customer)

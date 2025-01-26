@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservation List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <h1>Reservation List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Vehicle</th>
+                <th>Customer</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Status</th>
+                <th>Total Cost</th>
+                <th>Payment Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for reservation in reservations %}
+            <tr>
+                <td>{{ reservation.vehicle }}</td>
+                <td>{{ reservation.customer }}</td>
+                <td>{{ reservation.start_date }}</td>
+                <td>{{ reservation.end_date }}</td>
+                <td>{{ reservation.status }}</td>
+                <td>{{ reservation.total_cost }}</td>
+                <td>{{ reservation.payment_status }}</td>
+                <td>
+                    <a href="{% url 'reservation_detail' reservation.id %}">View</a>
+                    <a href="{% url 'reservation_edit' reservation.id %}">Edit</a>
+                    <a href="{% url 'reservation_delete' reservation.id %}">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'reservation_add' %}">Add New Reservation</a>
+</body>
+</html>

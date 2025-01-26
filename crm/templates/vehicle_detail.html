@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Detail</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Vehicle Detail</h1>
+        <div class="vehicle-detail">
+            <img src="{{ vehicle.image.url }}" alt="{{ vehicle.make }} {{ vehicle.model }}">
+            <ul>
+                <li><strong>Make:</strong> {{ vehicle.make }}</li>
+                <li><strong>Model:</strong> {{ vehicle.model }}</li>
+                <li><strong>Year:</strong> {{ vehicle.year }}</li>
+                <li><strong>VIN:</strong> {{ vehicle.vin }}</li>
+                <li><strong>License Plate:</strong> {{ vehicle.license_plate }}</li>
+                <li><strong>Status:</strong> {{ vehicle.status }}</li>
+                <li><strong>Mileage:</strong> {{ vehicle.mileage }}</li>
+                <li><strong>Last Service Date:</strong> {{ vehicle.last_service_date }}</li>
+            </ul>
+            <a href="{% url 'vehicle_edit' vehicle.id %}">Edit</a>
+            <a href="{% url 'vehicle_list' %}">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>

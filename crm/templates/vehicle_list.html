@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle List</title>
+</head>
+<body>
+    <h1>Vehicle List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Year</th>
+                <th>VIN</th>
+                <th>License Plate</th>
+                <th>Status</th>
+                <th>Mileage</th>
+                <th>Last Service Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vehicle in vehicles %}
+            <tr>
+                <td>{{ vehicle.make }}</td>
+                <td>{{ vehicle.model }}</td>
+                <td>{{ vehicle.year }}</td>
+                <td>{{ vehicle.vin }}</td>
+                <td>{{ vehicle.license_plate }}</td>
+                <td>{{ vehicle.status }}</td>
+                <td>{{ vehicle.mileage }}</td>
+                <td>{{ vehicle.last_service_date }}</td>
+                <td>
+                    <a href="{% url 'vehicle_detail' vehicle.pk %}">View</a>
+                    <a href="{% url 'vehicle_edit' vehicle.pk %}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'vehicle_add' %}">Add New Vehicle</a>
+</body>
+</html>

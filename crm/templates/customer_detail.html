@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Detail</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Customer Detail</h1>
+        <div class="customer-detail">
+            <p><strong>First Name:</strong> {{ customer.first_name }}</p>
+            <p><strong>Last Name:</strong> {{ customer.last_name }}</p>
+            <p><strong>Email:</strong> {{ customer.email }}</p>
+            <p><strong>Phone:</strong> {{ customer.phone }}</p>
+            <p><strong>Address:</strong> {{ customer.address }}</p>
+            <p><strong>Notes:</strong> {{ customer.notes }}</p>
+        </div>
+        <div class="actions">
+            <a href="{% url 'edit_customer' customer.id %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_customer' customer.id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'customer_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</body>
+</html>
